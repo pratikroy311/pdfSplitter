@@ -29,12 +29,9 @@ def split_pdf_by_headings(pdf_path, headings):
             print("I m here",1)
             if '/XObject' in page['/Resources']:
                 # Extract the image from the page
-                print("I m here",2)
                 xObject = page['/Resources']['/XObject'].get_object()
-                g=1
                 for obj in xObject:
                     if xObject[obj]['/Subtype'] == '/Image':
-                        # print("I m here inside for",g+=1)
                         # Get the image data
                         image_data = xObject[obj].get_data()
 
@@ -69,7 +66,6 @@ def split_pdf_by_headings(pdf_path, headings):
                             break
                 else:
                     if fuzz.partial_ratio(value, page_text) >= 90:
-                            print("current heading:",key)
                             current_headings.append(value)
                             current_tags.append(key)
                             # headings_copy.remove(heading)
