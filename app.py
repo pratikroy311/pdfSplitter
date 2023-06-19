@@ -26,7 +26,6 @@ def split_pdf_by_headings(pdf_path, headings):
 
         for i, page in enumerate(pdf.pages):
             page_text = ''
-            print("I m here",1)
             if '/XObject' in page['/Resources']:
                 # Extract the image from the page
                 xObject = page['/Resources']['/XObject'].get_object()
@@ -95,13 +94,8 @@ def split_pdf_by_headings(pdf_path, headings):
                 heading = current_tags[i]
                 file_name = f'{heading}.pdf'  # Use the heading as the file name
                 pdf_file_path = os.path.join(folder_path, file_name)
-                if 'DOCUSIGN' in pdf_file_path:
-                    pass
-                else:
-                    with open(pdf_file_path, 'wb') as output_file:
-                        output_pdf.write(output_file)
-                # with open(f'output_{i}.pdf', 'wb') as output_file:
-                #     output_pdf.write(output_file)
+                with open(pdf_file_path, 'wb') as output_file:
+                    output_pdf.write(output_file)
         except:
             pass
 
